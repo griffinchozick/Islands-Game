@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DevTool : MonoBehaviour
 {
-    private void Start()
+    public void MoveInput()
     {
+        Debug.Log("Creating New Island");
         Island island = new Island();
     }
 
