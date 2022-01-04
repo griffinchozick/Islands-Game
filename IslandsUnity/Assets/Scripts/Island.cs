@@ -7,28 +7,29 @@ public class Island : MonoBehaviour
     public int islandDimensions = 4;
     public GameObject gridSpotPrefab;
 
-    private GameObject[,] grid;
-    public GameObject[,] Grid { get { return grid; } 
+    private GridSpot[,] grid;
+    public GridSpot[,] Grid { get { return grid; } 
         //Fills in the grid with empty gridspots
         private set {
             int length = value.GetLength(0);
             int length2 = value.GetLength(1);
-            grid = new GameObject[length, length2];
+            grid = new GridSpot[length, length2];
             for (int i = 0; i < length; i++)
             {
                 for (int j = 0; j < length2; j++)
                 {
                     // Instantiate at next postion in grid and sets the island as the parent object.
-                    var newGridSpot= Instantiate(gridSpotPrefab, new Vector3(i, j, 0), Quaternion.identity);
-                    grid[i, j] = newGridSpot;
+                    //.5f is to offset them so they algin with the unit grid
+                    var newGridSpot= Instantiate(gridSpotPrefab, new Vector3(i +.5f, j +.5f, 0), Quaternion.identity);
+                    grid[i, j] = newGridSpot.GetComponent<GridSpot>();
                     newGridSpot.transform.SetParent(transform, false);
                 }
             }
         }
     }
-    void Start()
+    void Awake()
     {
-        Grid = new GameObject[islandDimensions, islandDimensions];
+        Grid = new GridSpot[islandDimensions, islandDimensions];
     }
 
 
