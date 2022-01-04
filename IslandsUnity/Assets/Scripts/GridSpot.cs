@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GridSpot 
+public class GridSpot : MonoBehaviour
 {
-    public int value =  0;
-    public GridSpot() {
-        value = 3;
+    public string id;
+
+    void Start()
+    {
+        id = transform.position.x.ToString() + transform.position.y.ToString();
     }
 }
