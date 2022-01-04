@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0539d9e3ecad904cbfa7cea3eadac90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandDimensions: 4
+  islandDimensions: 3
   gridSpotPrefab: {fileID: 2110246204581895615, guid: 506979851c9d6cb43924e526e300d1b5, type: 3}
 --- !u!212 &5622886
 SpriteRenderer:

@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class GridSpot : MonoBehaviour
 {
+    //Different Type of Materials that can be present on grid spot
+    public enum Material
+    {
+        Empty,
+        Red,
+        Blue
+    }
+
+    public bool IsEmpty => SpotMaterial == Material.Empty;
+    public Material SpotMaterial = Material.Empty;
+
     public string id;
 
     void Start()
