@@ -20,9 +20,10 @@ public class Island : MonoBehaviour
                 {
                     // Instantiate at next postion in grid and sets the island as the parent object.
                     //.5f is to offset them so they algin with the unit grid
-                    var newGridSpot= Instantiate(gridSpotPrefab, new Vector3(i +.5f, j +.5f, 0), Quaternion.identity);
-                    grid[i, j] = newGridSpot.GetComponent<GridSpot>();
-                    newGridSpot.transform.SetParent(transform, false);
+                    var newGridSpotObj= Instantiate(gridSpotPrefab, new Vector3(i +.5f, j +.5f, 0), Quaternion.identity);
+                    grid[i, j] = newGridSpotObj.GetComponent<GridSpot>();
+                    grid[i, j].Coordinates = new Vector2Int(i, j);
+                    newGridSpotObj.transform.SetParent(transform, false);
                 }
             }
         }

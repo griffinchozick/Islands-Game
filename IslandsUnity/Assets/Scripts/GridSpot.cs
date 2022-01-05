@@ -16,11 +16,11 @@ public class GridSpot : MonoBehaviour
     public bool IsEmpty => SpotMaterial == Material.Empty;
     public Material SpotMaterial = Material.Empty;
 
-    public string id;
+    public Vector2Int Coordinates;
 
     void Start()
     {
-        id = transform.position.x.ToString() + transform.position.y.ToString();
+       
     }
 
     public void Highlight(bool alreadyHighlighted)

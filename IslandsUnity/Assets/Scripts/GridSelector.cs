@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class GridSelector : MonoBehaviour
 {
@@ -24,22 +25,21 @@ public class GridSelector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        CurrentGridSpot = island.Grid[0, 0];
     }
 
     // Update is called once per frame
-    public void UpdateCurrentGridSpot()
+    public void UpdateGridSpot(Vector2 direction)
     {
-        Vector2 screenPosition = Mouse.current.position.ReadValue();
-        Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
-        if (InBounds(worldPosition))
+        Vector2Int targetpos = Vector2Int.CeilToInt(direction) + currentGridSpot.Coordinates;
+        if (InBounds(targetpos))
         {
-            Debug.Log(worldPosition);
-            CurrentGridSpot = island.Grid[Mathf.FloorToInt(worldPosition.x), Mathf.FloorToInt(worldPosition.y)];
+            Debug.Log(targetpos);
+            CurrentGridSpot = island.Grid[targetpos.x,targetpos.y];
         }
     }
 
-    bool InBounds(Vector2 position)
+    bool InBounds(Vector2Int position)
     {   
         //Insures that x and y value are both with the closed interval of [0, islandDimesion]
         if (Mathf.Abs(2 * position.x - island.islandDimensions) <= island.islandDimensions
