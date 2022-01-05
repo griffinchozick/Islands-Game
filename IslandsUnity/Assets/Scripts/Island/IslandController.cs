@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
-public class GridSelector : MonoBehaviour
+public class IslandController : MonoBehaviour
 {
+
+
     private GridSpot currentGridSpot;
     public GridSpot CurrentGridSpot
     {
@@ -34,7 +36,6 @@ public class GridSelector : MonoBehaviour
         Vector2Int targetpos = Vector2Int.CeilToInt(direction) + currentGridSpot.Coordinates;
         if (InBounds(targetpos))
         {
-            Debug.Log(targetpos);
             CurrentGridSpot = island.Grid[targetpos.x,targetpos.y];
         }
     }
@@ -48,10 +49,13 @@ public class GridSelector : MonoBehaviour
             return true;
         }
         return false;
-
-
     }
-    
-
+    [SerializeField] GameObject matprefab;
+    public void PlaceMaterial()
+    {
+        currentGridSpot.ChangeMaterial(GridSpot.Material.Red);
+        var newMat = Instantiate(matprefab, new Vector3(0, 0, 0), Quaternion.identity);
+        newMat.transform.SetParent(currentGridSpot.transform,);
+    }
 
 }
