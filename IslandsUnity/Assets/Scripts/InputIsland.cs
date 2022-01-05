@@ -6,8 +6,9 @@ using static UnityEngine.InputSystem.InputAction;
 public class InputIsland : MonoBehaviour
 {
     [SerializeField] GridSelector gridSelector;
-    public void Move(CallbackContext context)
+    public void OnMove(CallbackContext context)
     {
+        if (!context.started) { return; }
         gridSelector.UpdateGridSpot(context.ReadValue<Vector2>());
     }
 

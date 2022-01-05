@@ -42,8 +42,8 @@ public class GridSelector : MonoBehaviour
     bool InBounds(Vector2Int position)
     {   
         //Insures that x and y value are both with the closed interval of [0, islandDimesion]
-        if (Mathf.Abs(2 * position.x - island.islandDimensions) <= island.islandDimensions
-            && Mathf.Abs(2 * position.y - island.islandDimensions) <= island.islandDimensions)
+        if (0 <= position.x && position.x < island.islandDimensions
+            && 0 <= position.y && position.y < island.islandDimensions)
         {
             return true;
         }
