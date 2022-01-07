@@ -53,9 +53,12 @@ public class IslandController : MonoBehaviour
     [SerializeField] GameObject matprefab;
     public void PlaceMaterial()
     {
+        if (!currentGridSpot.IsEmpty) { return; }
         currentGridSpot.ChangeMaterial(GridSpot.Material.Red);
+
         var newMat = Instantiate(matprefab, new Vector3(0, 0, 0), Quaternion.identity);
-        newMat.transform.SetParent(currentGridSpot.transform,);
+        newMat.transform.SetParent(currentGridSpot.transform);
+        newMat.transform.localPosition = Vector3.zero;
     }
 
 }
