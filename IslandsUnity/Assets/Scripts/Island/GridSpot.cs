@@ -12,15 +12,19 @@ public class GridSpot : MonoBehaviour
         Blue
     }
 
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    public SpriteRenderer SpriteRenderer;
     public bool IsEmpty => SpotMaterial == Material.Empty;
     public Material SpotMaterial = Material.Empty;
 
     public Vector2Int Coordinates;
 
-    void Start()
+    public bool highlighted = false;
+
+    public void ToggleSpotSelector()
     {
-       
+        highlighted = !highlighted;
+        float opacity = (highlighted) ? 0f : 1f;
+        SpriteRenderer.color = new Color(1f, 1f, 1f, opacity);
     }
 
 

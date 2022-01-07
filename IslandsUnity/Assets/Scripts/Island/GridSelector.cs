@@ -5,24 +5,13 @@ using UnityEngine;
 //MVC View for IslandController
 public class GridSelector : MonoBehaviour
 {
-    public void SelectSpot(GridSpot target)
+    GridSpot highlightedSpot = null;
+    public void SelectMoveSpot(GridSpot target)
     {
-        //float opacity = (alreadyHighlighted) ? 1f : 0f;
-        //spriteRenderer.color = new Color(1f, 1f, 1f, opacity);
+        if(highlightedSpot != null) { highlightedSpot.ToggleSpotSelector(); }
+        target.ToggleSpotSelector();
+        highlightedSpot = target;
     }
-}
 
-//private GridSpot currentGridSpot;
-//public GridSpot CurrentGridSpot
-//{
-//    get { return currentGridSpot; }
-//    set
-//    {
-//        if (currentGridSpot != value)
-//        {     
-//            if (currentGridSpot != null) { currentGridSpot.Highlight(true); }
-//            currentGridSpot = value;
-//            currentGridSpot.Highlight(false);
-//        }
-//    }
-//}
+
+}

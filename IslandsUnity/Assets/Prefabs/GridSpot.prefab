@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1db63346164bfa24aa58172ca44d710c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 4012091330908059747}
+  SpriteRenderer: {fileID: 4012091330908059747}
   SpotMaterial: 0
-  id: 
+  Coordinates: {x: 0, y: 0}
+  highlighted: 0
 --- !u!212 &4012091330908059747
 SpriteRenderer:
   m_ObjectHideFlags: 0

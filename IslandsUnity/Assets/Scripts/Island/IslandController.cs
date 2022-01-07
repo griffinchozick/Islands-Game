@@ -15,8 +15,8 @@ public class IslandController : MonoBehaviour
         UpdateGridSpot();
     }
 
-    public void UpdateGridSpot() => gridSelector.SelectSpot(island.CurrentGridSpot);
-    public void UpdateGridSpot(Vector2 direction ) => gridSelector.SelectSpot(island.GetNewCurrentSpot(Vector2Int.CeilToInt(direction))); 
+    public void UpdateGridSpot() => gridSelector.SelectMoveSpot(island.CurrentGridSpot);
+    public void UpdateGridSpot(Vector2 direction ) => gridSelector.SelectMoveSpot(island.GetNewCurrentSpot(Vector2Int.CeilToInt(direction))); 
 
     [SerializeField] GameObject matprefab;
     //public void PlaceMaterial()
