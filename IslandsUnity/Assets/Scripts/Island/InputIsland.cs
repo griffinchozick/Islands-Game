@@ -15,7 +15,7 @@ public class InputIsland : MonoBehaviour
     public void OnFire(CallbackContext context)
     {
         if (!context.performed) { return; }
-        islandController.PlaceMaterial();
+        //islandController.PlaceMaterial();
     }
 
 }

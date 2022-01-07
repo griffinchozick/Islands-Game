@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7992422410281640795}
   - component: {fileID: 7992422410281640793}
   - component: {fileID: 7992422410281640794}
+  - component: {fileID: 8019029556565691313}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -154,7 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11af4ca89eafcc24a9643b630a0b8c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSelector: {fileID: 8019029556565691313}
   island: {fileID: 7992422410281640793}
+  matprefab: {fileID: 0}
 --- !u!114 &7992422410281640793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,3 +223,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8019029556565691313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992422410281640799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dca9bd2f9468da459957248a4e80445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -23,11 +23,7 @@ public class GridSpot : MonoBehaviour
        
     }
 
-    public void Highlight(bool alreadyHighlighted)
-    {
-        float opacity = (alreadyHighlighted)?1f : 0f;
-        spriteRenderer.color = new Color(1f, 1f, 1f, opacity);
-    }
+
 
     public void ChangeMaterial(Material newMat)
     {
