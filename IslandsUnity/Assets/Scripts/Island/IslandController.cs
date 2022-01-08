@@ -13,6 +13,7 @@ public class IslandController : MonoBehaviour
     private void Start()
     {
         UpdateGridSpot();
+
     }
 
     public void UpdateGridSpot() => gridSelector.SelectMoveSpot(island.CurrentGridSpot);

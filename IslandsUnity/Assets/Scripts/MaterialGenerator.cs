@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//DataSource for Island Model
 public class MaterialGenerator : MonoBehaviour
 {
     [SerializeField] Material[] matPrefabs;

@@ -8,6 +8,7 @@ public class Island : MonoBehaviour
     public int islandDimensions = 4;
     public GameObject gridSpotPrefab;
     [SerializeField] MaterialGenerator matGenerator;
+    [SerializeField] GameObject gridSpotsObj;
 
     private GridSpot currentGridSpot;
     public GridSpot CurrentGridSpot { 
@@ -34,7 +35,7 @@ public class Island : MonoBehaviour
                     var newGridSpotObj = Instantiate(gridSpotPrefab, new Vector3(i + .5f, j + .5f, 0), Quaternion.identity);
                     grid[i, j] = newGridSpotObj.GetComponent<GridSpot>();
                     grid[i, j].Coordinates = new Vector2Int(i, j);
-                    newGridSpotObj.transform.SetParent(transform, false);
+                    newGridSpotObj.transform.SetParent(gridSpotsObj.transform, false);
                 }
             }
             return grid;
