@@ -5,16 +5,26 @@ using UnityEngine;
 public class GridSpot : MonoBehaviour
 {
     //Different Type of Materials that can be present on grid spot
-    public enum Material
-    {
-        Empty,
-        Red,
-        Blue
-    }
+
 
     public SpriteRenderer SpriteRenderer;
-    public bool IsEmpty => SpotMaterial == Material.Empty;
-    public Material SpotMaterial = Material.Empty;
+    public bool HasMaterial { get { return spotMaterial != null; } }
+    Material spotMaterial;
+    public Material SpotMaterial { 
+        get { return spotMaterial; }
+        set
+        {
+            if(HasMaterial && value != null) {
+                Debug.LogWarning("Trying to place a material on a occupied spot");
+                return;
+            }
+            spotMaterial = value;
+            if (spotMaterial != null) {
+                spotMaterial.Obj.transform.SetParent(transform, false);
+               // spotMaterial.Obj.transform.localposition = Vector3.zero;
+            }
+        } 
+    }
 
     public Vector2Int Coordinates;
 

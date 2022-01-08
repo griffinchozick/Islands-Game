@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &5622887 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7992422410281640795, guid: ad8821a32803b114698fa143670c415a, type: 3}
-  m_PrefabInstance: {fileID: 7992422410284478268}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11af4ca89eafcc24a9643b630a0b8c2b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &458700831
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,6 +344,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757465249 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7992422410281640789, guid: ad8821a32803b114698fa143670c415a, type: 3}
+  m_PrefabInstance: {fileID: 7992422410284478268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 672488df09205d34292d831f4fa60fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1398431364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1398431366}
+  - component: {fileID: 1398431365}
+  m_Layer: 0
+  m_Name: MaterialGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1398431365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398431364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc77c98b10b4df49bf3bda755ed1f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  matPrefab: {fileID: 3485069633874217458, guid: 860198a97a988e64e8413609c39954e9, type: 3}
+--- !u!4 &1398431366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398431364}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6399673, y: -0.37948704, z: -1.6392347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7992422410284478268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -368,23 +412,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 5622887}
+      objectReference: {fileID: 757465249}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PlaceMaterial
+      value: OnFire
       objectReference: {fileID: 0}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: IslandController, Assembly-CSharp
+      value: InputIsland, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7992422410281640788, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -434,6 +478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7992422410281640793, guid: ad8821a32803b114698fa143670c415a, type: 3}
+      propertyPath: matGenerator
+      value: 
+      objectReference: {fileID: 1398431365}
     - target: {fileID: 7992422410281640795, guid: ad8821a32803b114698fa143670c415a, type: 3}
       propertyPath: matprefab
       value: 

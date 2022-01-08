@@ -16,17 +16,18 @@ public class IslandController : MonoBehaviour
     }
 
     public void UpdateGridSpot() => gridSelector.SelectMoveSpot(island.CurrentGridSpot);
-    public void UpdateGridSpot(Vector2 direction ) => gridSelector.SelectMoveSpot(island.GetNewCurrentSpot(Vector2Int.CeilToInt(direction))); 
+    public void UpdateGridSpot(Vector2 direction ) => gridSelector.SelectMoveSpot(island.GetNewCurrentSpot(Vector2Int.CeilToInt(direction)));
 
-    [SerializeField] GameObject matprefab;
-    //public void PlaceMaterial()
-    //{
-    //    if (!currentGridSpot.IsEmpty) { return; }
-    //    currentGridSpot.ChangeMaterial(GridSpot.Material.Red);
 
-    //    var newMat = Instantiate(matprefab, new Vector3(0, 0, 0), Quaternion.identity);
-    //    newMat.transform.SetParent(currentGridSpot.transform);
-    //    newMat.transform.localPosition = Vector3.zero;
-    //}
+    public void TryPlaceMaterial() {
+        if (island.CurrentGridSpot.HasMaterial) {
+            Debug.LogWarning("Trying to place on occupied spot");
+            gridSelector.CantSelectFeedback();
+            return;
+        }
+        island.PlaceUpcomingMaterial();
+        
+    }
+
 
 }

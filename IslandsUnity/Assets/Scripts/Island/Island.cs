@@ -7,6 +7,7 @@ public class Island : MonoBehaviour
 {
     public int islandDimensions = 4;
     public GameObject gridSpotPrefab;
+    [SerializeField] MaterialGenerator matGenerator;
 
     private GridSpot currentGridSpot;
     public GridSpot CurrentGridSpot { 
@@ -52,6 +53,14 @@ public class Island : MonoBehaviour
             CurrentGridSpot = Grid[targetPos.x,targetPos.y];
         }
         return CurrentGridSpot;
+    }
+
+    public Material UpcomingMaterial;
+    public void PlaceUpcomingMaterial()
+    {
+        //Change first line
+        UpcomingMaterial = matGenerator.StandardMaterial;
+        CurrentGridSpot.ChangeMaterial(UpcomingMaterial);
     }
 }
 

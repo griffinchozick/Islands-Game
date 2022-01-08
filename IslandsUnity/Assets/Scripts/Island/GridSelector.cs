@@ -13,5 +13,10 @@ public class GridSelector : MonoBehaviour
         highlightedSpot = target;
     }
 
+    public void CantSelectFeedback()
+    {
+        //Feedback like maybe a shaking square or something to show you can't select this spot?
+    }
+
 
 }
