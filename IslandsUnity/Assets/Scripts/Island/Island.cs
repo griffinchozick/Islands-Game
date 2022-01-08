@@ -20,7 +20,20 @@ public class Island : MonoBehaviour
         set { currentGridSpot = value; }}
 
     private GridSpot[,] grid;
-
+    private Material upcomingMaterial  = null;
+    public Material UpcomingMaterial
+    {
+        get
+        {
+            if (upcomingMaterial == null)
+                upcomingMaterial = matGenerator.GetNextMaterial();
+            return upcomingMaterial;
+        }
+        set
+        {
+            upcomingMaterial = value;
+        }
+    }
 
     public GridSpot[,] Grid { 
         get {
@@ -56,12 +69,15 @@ public class Island : MonoBehaviour
         return CurrentGridSpot;
     }
 
-    public Material UpcomingMaterial;
+
     public void PlaceUpcomingMaterial()
     {
-        //Change first line
-        UpcomingMaterial = matGenerator.GetNextMaterial();
+        //Returning false means unable to place the material
+        if(CurrentGridSpot.HasMaterial) { return;}
+
         CurrentGridSpot.ChangeMaterial(UpcomingMaterial);
+        UpcomingMaterial = null;
+
     }
 }
 

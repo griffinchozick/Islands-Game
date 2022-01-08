@@ -11,8 +11,7 @@ public class Material : MonoBehaviour
     }
 
     public MatType Type;
-
-    GameObject obj = null;
+    private GameObject obj = null;
     public GameObject Obj { 
         get { 
             if(obj != null) return obj; 
@@ -21,4 +20,6 @@ public class Material : MonoBehaviour
         } 
         set { obj = value; }
     }
+
+    public SpriteRenderer SpriteRenderer;
 }

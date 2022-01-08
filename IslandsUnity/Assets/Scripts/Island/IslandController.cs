@@ -8,12 +8,13 @@ public class IslandController : MonoBehaviour
 {
 
     [SerializeField] GridSelector gridSelector;
+    [SerializeField] MaterialPreview materialPreview;
     [SerializeField] Island island;
 
     private void Start()
     {
         UpdateGridSpot();
-
+        UpdateMaterialPreview();
     }
 
     public void UpdateGridSpot() => gridSelector.SelectMoveSpot(island.CurrentGridSpot);
@@ -27,8 +28,12 @@ public class IslandController : MonoBehaviour
             return;
         }
         island.PlaceUpcomingMaterial();
-        
+        UpdateMaterialPreview();
+
+        //if problems tryn using a function with a bool out to see if island succesfully executed its function      
     }
+
+    void UpdateMaterialPreview() => materialPreview.PreviewNextMat(island.UpcomingMaterial);
 
 
 }
