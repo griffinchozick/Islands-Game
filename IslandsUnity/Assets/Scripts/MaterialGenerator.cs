@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class MaterialGenerator : MonoBehaviour
 {
-    [SerializeField] GameObject matPrefab;
+    [SerializeField] Material[] matPrefabs;
+    public List<Material> MaterialQueue;
 
 
-    public Material StandardMaterial { 
+    public Material NextMaterial {
         get
         {
-            var newMat = Instantiate(matPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            return newMat.GetComponent<Material>();
-        } 
+            return MaterialQueue[0];
+        }
     }
-   
+    private void Awake()
+    {
+        CreateRandomizedBag(8);
+    }
+
+    public void CreateRandomizedBag(int bagSize)
+    {
+        int upperLimit = matPrefabs.Length;
+        for (int i = 0; i < bagSize; i++)
+        {
+            var newMat = Instantiate(matPrefabs[Random.Range(0, upperLimit)], new Vector3(0, 0, 0), Quaternion.identity);
+            MaterialQueue.Add(newMat.GetComponent<Material>());
+        }
+    }
+
+    public Material GetNextMaterial()
+    {
+        Material nextMaterial = MaterialQueue[0];
+        MaterialQueue.RemoveAt(0);
+        return nextMaterial;
+    }
 }

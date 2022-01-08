@@ -59,7 +59,7 @@ public class Island : MonoBehaviour
     public void PlaceUpcomingMaterial()
     {
         //Change first line
-        UpcomingMaterial = matGenerator.StandardMaterial;
+        UpcomingMaterial = matGenerator.GetNextMaterial();
         CurrentGridSpot.ChangeMaterial(UpcomingMaterial);
     }
 }

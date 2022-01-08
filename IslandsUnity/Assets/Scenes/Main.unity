@@ -384,7 +384,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc77c98b10b4df49bf3bda755ed1f92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  matPrefab: {fileID: 3485069633874217458, guid: 860198a97a988e64e8413609c39954e9, type: 3}
+  matPrefabs:
+  - {fileID: 8214934226952183130, guid: f8ec195b766d4854cbf4add2b6b43485, type: 3}
+  - {fileID: 4796053622616135742, guid: 077d5c7b08cd5754a8f9b3b09e234083, type: 3}
+  MaterialQueue: []
 --- !u!4 &1398431366
 Transform:
   m_ObjectHideFlags: 0
