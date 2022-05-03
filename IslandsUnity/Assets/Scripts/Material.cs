@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Material : MonoBehaviour
 {
+ 
     public enum MatType
     {
+        None,
         Red,
         Blue
     }
@@ -22,4 +24,7 @@ public class Material : MonoBehaviour
     }
 
     public SpriteRenderer SpriteRenderer;
+
+    public Material[] Neighbors;
+
 }

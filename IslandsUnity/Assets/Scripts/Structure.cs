@@ -2,17 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Structure: MonoBehaviour
+[CreateAssetMenu(menuName ="Scriptable Objects/Structure")]
+public class Structure : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Blueprint Bprint;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
