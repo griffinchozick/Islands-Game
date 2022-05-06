@@ -1,39 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-//DataSource for Island Model
+//Object Pooler for Materials
 public class MaterialGenerator : MonoBehaviour
 {
-    [SerializeField] Material[] matPrefabs;
-    public List<Material> MaterialQueue;
-    public int DefaultBagSize = 8;
+    //The Material List for this round
+    public List<Material.MatType> roundMaterialList;
 
-    public Material NextMaterial {
-        get
-        {
-            if (MaterialQueue.Count.Equals(0))
-                CreateRandomizedBag(DefaultBagSize);
-            return MaterialQueue[0];
-        }
+    public void Start()
+    {
+        AddEvenBag(15);
     }
 
-    public void CreateRandomizedBag(int bagSize)
+    public void AddEvenBag(int bagAmount = 1)
     {
-        int upperLimit = matPrefabs.Length;
-        for (int i = 0; i < bagSize; i++)
+        //Creates a bag (group of materials) with each material prefab appearing exactly once in a random order
+        //Its an even bag as all materials have equal occurances
+
+        Material.MatType[] nonTrashMaterials = (Material.MatType[])Enum.GetValues(typeof(Material.MatType));
+        List<Material.MatType> bag = new List<Material.MatType>();
+        for (int i = 1; i < nonTrashMaterials.Length; i++)
         {
-            var newMat = Instantiate(matPrefabs[Random.Range(0, upperLimit)], new Vector3(0, 0, 0), Quaternion.identity);
-            newMat.transform.SetParent(transform, false);
-            MaterialQueue.Add(newMat.GetComponent<Material>());
+            bag.Add(nonTrashMaterials[i]);
+        }
+        for(int i = 0; i < bagAmount; i++)
+        {
+            bag.Shuffle();
+            roundMaterialList.AddRange(bag);
         }
     }
 
     //Returns the next material but also removes that material from the list
-    public Material GetNextMaterial()
+    public Material GetMaterial(int index)
     {
-        Material nextMaterial = NextMaterial;
-        MaterialQueue.RemoveAt(0);
-        return nextMaterial;
+        while (roundMaterialList.Count <= index){
+            AddEvenBag(1);
+        }
+        return new Material(roundMaterialList[index]);
     }
 }

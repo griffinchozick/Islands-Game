@@ -5,6 +5,7 @@ using UnityEngine;
 //MVC View for IslandController
 public class GridSelector : MonoBehaviour
 {
+    /*
     GridSpot highlightedSpot = null;
     public void SelectMoveSpot(GridSpot target)
     {
@@ -16,7 +17,7 @@ public class GridSelector : MonoBehaviour
     public void CantSelectFeedback()
     {
         //Feedback like maybe a shaking square or something to show you can't select this spot?
-    }
+    }*/
 
 
 }

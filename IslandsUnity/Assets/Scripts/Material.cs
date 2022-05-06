@@ -2,28 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Material : MonoBehaviour
+public class Material 
 {
- 
     public enum MatType
     {
-        None,
+        Trash,
         Red,
-        Blue
+        Blue,
+        Green,
+    }
+    public MatType type;
+    public Material(MatType _type)
+    {
+        type = _type;
     }
 
-    public MatType Type;
-    private GameObject obj = null;
-    public GameObject Obj { 
-        get { 
-            if(obj != null) return obj; 
-            obj = gameObject;
-            return obj;
-        } 
-        set { obj = value; }
-    }
 
-    public SpriteRenderer SpriteRenderer;
+
 
     public Material[] Neighbors;
 

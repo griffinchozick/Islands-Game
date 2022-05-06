@@ -6,34 +6,23 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class IslandController : MonoBehaviour
 {
-
-    [SerializeField] GridSelector gridSelector;
-    [SerializeField] MaterialPreview materialPreview;
+    [SerializeField] AirdropPreview airdropPreview;
     [SerializeField] Island island;
-
-    private void Start()
-    {
-        UpdateGridSpot();
-        UpdateMaterialPreview();
-    }
-
-    public void UpdateGridSpot() => gridSelector.SelectMoveSpot(island.CurrentGridSpot);
-    public void UpdateGridSpot(Vector2 direction ) => gridSelector.SelectMoveSpot(island.GetNewCurrentSpot(Vector2Int.CeilToInt(direction)));
-
-
     public void TryPlaceMaterial() {
-        if (island.CurrentGridSpot.HasMaterial) {
-            Debug.LogWarning("Trying to place on occupied spot");
-            gridSelector.CantSelectFeedback();
+        //Try to place the next Material in Material Preview, if it succeeds update the material preview
+        if (airdropPreview.nextMaterial == null) {
+            Debug.LogWarning("AirdropPreview NextMaterial is null");
+        }
+        bool result = island.PlaceMaterial(airdropPreview.nextMaterial);
+        if (!result) {
             return;
         }
-        island.PlaceUpcomingMaterial();
-        UpdateMaterialPreview();
-
-        //if problems tryn using a function with a bool out to see if island succesfully executed its function      
+        airdropPreview.GetNewMaterial(); 
     }
 
-    void UpdateMaterialPreview() => materialPreview.PreviewNextMat(island.UpcomingMaterial);
-
-
+    public void TryChangeGridSelector(Vector2Int direction)
+    {
+        //Try to change where the grid selector is
+        bool result = island.MoveCurrentGridSpot(direction + island.currentGridSpot);
+    }
 }

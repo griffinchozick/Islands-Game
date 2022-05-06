@@ -9,7 +9,7 @@ public class InputIsland : MonoBehaviour
     public void OnMove(CallbackContext context)
     {
         if (!context.performed) { return; }
-        islandController.UpdateGridSpot(context.ReadValue<Vector2>());
+        islandController.TryChangeGridSelector(Vector2Int.CeilToInt(context.ReadValue<Vector2>()));
     }
 
     public void OnFire(CallbackContext context)

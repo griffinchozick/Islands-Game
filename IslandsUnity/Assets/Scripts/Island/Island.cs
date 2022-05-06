@@ -6,20 +6,65 @@ using UnityEngine;
 public class Island : MonoBehaviour
 {
     public int islandDimensions = 4;
-    public GameObject gridSpotPrefab;
-    [SerializeField] MaterialGenerator matGenerator;
-    [SerializeField] GameObject gridSpotsObj;
+    public Material[,] Grid { get; private set; }
+    //Should always be within the grid 
+    public Vector2Int currentGridSpot { get; private set; } = Vector2Int.zero;
+    [SerializeField] IslandRenderer islandRenderer;
+    private void Start()
+    {
+        Grid = new Material[islandDimensions, islandDimensions];
+        islandRenderer.RenderIsland();
+    }
 
-    private GridSpot currentGridSpot;
-    public GridSpot CurrentGridSpot { 
-        get
+
+    
+    //Helpers
+    private bool IsEmpty(Vector2Int target)
+    {
+        //Returns if the location has a Material
+        //Garbage Material will return False
+        return Grid[target[0], target[1]] == null;
+    }
+    private bool OnGrid(Vector2Int target)
+    {
+        //Returns if the locaiton is on the Grid
+        return 0 <= target[0] && target[0] < islandDimensions && 
+            0 <= target[1] && target[1] < islandDimensions;
+    }
+
+   
+
+    //Main Functions
+    public bool PlaceMaterial(Material mat)
+    {
+        //Returning false means unable to place the material
+        if (!IsEmpty(currentGridSpot))
         {
-            if (currentGridSpot == null) { currentGridSpot = Grid[0, 0]; }
-            return currentGridSpot;
+            Debug.LogWarning("Trying to place on occupied spot");
+            return false;
         }
-        set { currentGridSpot = value; }}
+        Grid[currentGridSpot[0], currentGridSpot[1]] = mat;
+        islandRenderer.UpdateSpotMaterial(currentGridSpot);
+        return true;
 
-    private GridSpot[,] grid;
+    }
+    public bool MoveCurrentGridSpot(Vector2Int target)
+    {
+        //Returning false means unable to move to that grid spot
+        if (!OnGrid(target))
+        {
+            Debug.LogWarning("Trying to move off the grid");
+            return false;
+        }
+        Vector2Int previousSpot = currentGridSpot;
+        currentGridSpot = target;
+        islandRenderer.UpdateSpotSelector(previousSpot);
+        islandRenderer.UpdateSpotSelector(currentGridSpot);
+        return true;
+
+
+    }
+    /*
     private Material upcomingMaterial  = null;
     public Material UpcomingMaterial
     {
@@ -35,7 +80,7 @@ public class Island : MonoBehaviour
         }
     }
 
-    public GridSpot[,] Grid { 
+    /*public GridSpot[,] Grid { 
         get {
             if (grid != null) return grid;
             grid = new GridSpot[islandDimensions, islandDimensions];
@@ -69,16 +114,7 @@ public class Island : MonoBehaviour
         return CurrentGridSpot;
     }
 
-
-    public void PlaceUpcomingMaterial()
-    {
-        //Returning false means unable to place the material
-        if(CurrentGridSpot.HasMaterial) { return;}
-
-        CurrentGridSpot.ChangeMaterial(UpcomingMaterial);
-        UpcomingMaterial = null;
-
-    }
+ */
 }
 
 

@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7992422410281640792}
   - component: {fileID: 7992422410281640788}
-  - component: {fileID: 7992422410281640789}
-  - component: {fileID: 7992422410281640795}
+  - component: {fileID: 5358059364057766600}
+  - component: {fileID: 1393568269972461667}
   - component: {fileID: 7992422410281640793}
+  - component: {fileID: 2367045294496985752}
   - component: {fileID: 7992422410281640794}
-  - component: {fileID: 8019029556565691313}
   m_Layer: 0
   m_Name: Island
   m_TagString: Untagged
@@ -32,7 +32,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2195894133163873515}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -63,7 +64,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7992422410281640789}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: InputIsland, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -130,7 +131,7 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &7992422410281640789
+--- !u!114 &5358059364057766600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 672488df09205d34292d831f4fa60fce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandController: {fileID: 7992422410281640795}
---- !u!114 &7992422410281640795
+  islandControllers: []
+--- !u!114 &1393568269972461667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,9 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11af4ca89eafcc24a9643b630a0b8c2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSelector: {fileID: 8019029556565691313}
+  airdropPreview: {fileID: 1339258123405308615}
   island: {fileID: 7992422410281640793}
-  matprefab: {fileID: 0}
 --- !u!114 &7992422410281640793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,8 +170,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0539d9e3ecad904cbfa7cea3eadac90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  islandDimensions: 3
-  gridSpotPrefab: {fileID: 2110246204581895615, guid: 506979851c9d6cb43924e526e300d1b5, type: 3}
+  islandDimensions: 5
+  islandRenderer: {fileID: 2367045294496985752}
+--- !u!114 &2367045294496985752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992422410281640799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ed47faa2fe1554f98750b548a902e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  island: {fileID: 0}
+  spotRenderers: []
+  spotMatRenderers: []
 --- !u!212 &7992422410281640794
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -223,15 +238,48 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8019029556565691313
+--- !u!1 &8602554889881076202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2195894133163873515}
+  - component: {fileID: 1339258123405308615}
+  m_Layer: 0
+  m_Name: Airdrop
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2195894133163873515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8602554889881076202}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7992422410281640792}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1339258123405308615
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7992422410281640799}
+  m_GameObject: {fileID: 8602554889881076202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dca9bd2f9468da459957248a4e80445, type: 3}
+  m_Script: {fileID: 11500000, guid: 48babd450a507d24eaad561d11b72591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialGenerator: {fileID: 0}
+  airdropRenderer: {fileID: 0}

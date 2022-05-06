@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridSpot : MonoBehaviour
 {
     //Different Type of Materials that can be present on grid spot
-
+    /*
 
     public SpriteRenderer SpriteRenderer;
     public bool HasMaterial { get { return spotMaterial != null; } }
@@ -38,5 +38,5 @@ public class GridSpot : MonoBehaviour
     public void ChangeMaterial(Material newMat)
     {
         SpotMaterial = newMat;
-    }
+    }*/
 }
