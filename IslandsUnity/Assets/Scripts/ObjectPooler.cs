@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
-{
+{/*
     //Creates object pools for each material type
     [System.Serializable]
     public class MaterialPool
@@ -57,4 +57,5 @@ public class ObjectPooler : MonoBehaviour
         return objectToSpawn;
 
     }
+}*/
 }

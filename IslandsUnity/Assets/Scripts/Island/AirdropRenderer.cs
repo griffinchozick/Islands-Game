@@ -8,10 +8,21 @@ public class AirdropRenderer : MonoBehaviour
     [SerializeField] AirdropPreview airdropPreview;
 
     public Image materialIcon;
+    [SerializeField] Image coloredTimerBorder;
 
-    public void UpdatePreview()
+
+    public void UpdatePreview(Sprite newSprite)
     {
-        materialIcon.sprite = SpriteDictionary.materialDictionary[airdropPreview.nextMaterial.type];
-        //Updates Airdrop Preview Sprites
+        materialIcon.sprite = newSprite;
+
+    }
+    public void UpdateTimer(float percentage)
+    {
+        if (percentage > 1 || percentage < 0)
+        {
+            Debug.LogError("Not a float between 1 and 0");
+            return; 
+        }
+        coloredTimerBorder.fillAmount = percentage;
     }
 }

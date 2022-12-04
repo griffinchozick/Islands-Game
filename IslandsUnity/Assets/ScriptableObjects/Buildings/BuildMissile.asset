@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 732e10534064c44449d428d66a1188a7, type: 3}
+  m_Name: BuildMissile
+  m_EditorClassIdentifier: 
+  constructionActions:
+  - {fileID: 11400000, guid: 2d74ca5597518c84ba2885146d4638c0, type: 2}
+  buildingName: Missile
+  buildingSprite: {fileID: -3985759516408998331, guid: a5b09b5cf6953d74bb13715def497179, type: 3}
+  buildingBlueprint: {fileID: 11400000, guid: abc38a2a2e7adb04f8d0226c27fe3686, type: 2}

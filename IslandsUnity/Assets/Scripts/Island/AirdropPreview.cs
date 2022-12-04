@@ -21,6 +21,11 @@ public class AirdropPreview : MonoBehaviour
     {
         nextMaterial = materialGenerator.GetMaterial(currentGeneratorIndex);
         currentGeneratorIndex++;
-        airdropRenderer.UpdatePreview();
+        airdropRenderer.UpdatePreview(nextMaterial.materialData.materialSprite);
+    }
+
+    public void UpdateTimer(float percentage)
+    {
+        airdropRenderer.UpdateTimer(percentage);
     }
 }

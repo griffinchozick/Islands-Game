@@ -4,36 +4,32 @@ using UnityEngine;
 
 //Updates Sprites to match island data
 public class IslandRenderer : MonoBehaviour
-{
-    [SerializeField] Island island;
-    
+{    
     public SpriteRenderer[] spotRenderers;
-    public SpriteRenderer[] spotMatRenderers;
+    public GameObject placeableObjectsContainer;
 
-    private int Vector2IntToIndex(Vector2Int vector)
+
+    private int Index(Vector2Int location)
     {
-        return vector.x + vector.y * 5;
+        //Converts vector2 Int to index
+        return location[0] + (location[1] * 5); 
     }
-    public void UpdateSpotMaterial(Vector2Int location)
+
+    public void AddSpotPlaceable(Vector2Int location, Placeable obj)
     {
-        Material loactionMat = island.Grid[location.x, location.y];
-        //Updates sprite renderer at <location> on grid
-        //Updates Materials on that location and selector icon for current grid spot
-        if (loactionMat == null)
-            spotMatRenderers[Vector2IntToIndex(location)].sprite = null;
+        if (obj is Trash)
+        {
+            spotRenderers[Index(location)].enabled = false;
+        }
         else
         {
-            spotMatRenderers[Vector2IntToIndex(location)].sprite = SpriteDictionary.materialDictionary[loactionMat.type];
+            obj.transform.parent = placeableObjectsContainer.transform;
+            obj.transform.localPosition = new Vector3(location.x, location.y, 0);
         }
     }
-
-    public void UpdateSpotSelector(Vector2Int location)
+    public void RemoveSpotPlaceable(Placeable obj)
     {
-        bool shouldSelect = island.currentGridSpot == location;
-        spotRenderers[Vector2IntToIndex(location)].enabled = !shouldSelect;
-    }
-    public void RenderIsland()
-    {
-        UpdateSpotSelector(island.currentGridSpot);
+        //Add logic to remove trash at a spot
+        Destroy(obj.gameObject);
     }
 }

@@ -5,64 +5,124 @@ using UnityEngine;
 //MVC Model for IslandController
 public class Island : MonoBehaviour
 {
-    public int islandDimensions = 4;
-    public Material[,] Grid { get; private set; }
+    public int islandDimensions = 5;
+    public Placeable[,] Grid { get; private set; }
+   // public bool[,] DefenseGrid;
     //Should always be within the grid 
-    public Vector2Int currentGridSpot { get; private set; } = Vector2Int.zero;
+    //public Vector2Int currentGridSpot { get; private set; } = Vector2Int.zero;
     [SerializeField] IslandRenderer islandRenderer;
+    //Delete below once pooler implemented
+    [SerializeField] GameObject trashPrefab;
+
+    private int trashSpots = 0;
+    private int objSpots = 0;
+    public int totalTakenUpSpots { get { return trashSpots + objSpots; } }
+
     private void Start()
     {
-        Grid = new Material[islandDimensions, islandDimensions];
-        islandRenderer.RenderIsland();
+        Grid = new Placeable[islandDimensions, islandDimensions];
+       // DefenseGrid = new bool[islandDimensions, islandDimensions];
     }
 
 
-    
-    //Helpers
-    private bool IsEmpty(Vector2Int target)
+    #region Helpers    
+    public bool IsEmpty(Vector2Int target)
     {
         //Returns if the location has a Material
         //Garbage Material will return False
         return Grid[target[0], target[1]] == null;
     }
-    private bool OnGrid(Vector2Int target)
+    public bool OnGrid(Vector2Int target)
     {
         //Returns if the locaiton is on the Grid
         return 0 <= target[0] && target[0] < islandDimensions && 
             0 <= target[1] && target[1] < islandDimensions;
     }
+    public Placeable AtGrid(Vector2Int target)
+    {
+        return Grid[target[0], target[1]];
+    }
+    #endregion
 
-   
+
 
     //Main Functions
-    public bool PlaceMaterial(Material mat)
+    public bool CanPlaceObject(Vector2Int location)
     {
-        //Returning false means unable to place the material
-        if (!IsEmpty(currentGridSpot))
+        if (!OnGrid(location))
         {
-            Debug.LogWarning("Trying to place on occupied spot");
+            Debug.LogWarning("Spot not on grid");
             return false;
         }
-        Grid[currentGridSpot[0], currentGridSpot[1]] = mat;
-        islandRenderer.UpdateSpotMaterial(currentGridSpot);
+        else if (!IsEmpty(location))
+        {
+            return false;
+        }
         return true;
-
     }
-    public bool MoveCurrentGridSpot(Vector2Int target)
+
+    public void AutoPlace(Placeable obj)
     {
-        //Returning false means unable to move to that grid spot
-        if (!OnGrid(target))
+        Vector2Int location = new Vector2Int();
+        for (int j = 4; j >= 0; j--)
         {
-            Debug.LogWarning("Trying to move off the grid");
-            return false;
+            for (int i = 4; i >= 0 ; i--)
+            {
+                location.x = i;
+                location.y = j;
+                if (CanPlaceObject(location))
+                {
+                    //Debug.Log("place");
+                    PlaceObject(obj, location);
+                    return;
+                }
+            }
         }
-        Vector2Int previousSpot = currentGridSpot;
-        currentGridSpot = target;
-        islandRenderer.UpdateSpotSelector(previousSpot);
-        islandRenderer.UpdateSpotSelector(currentGridSpot);
-        return true;
+    }
 
+    public void PlaceObject(Placeable obj, Vector2Int location)
+    {
+        Grid[location[0], location[1]] = obj;
+        islandRenderer.AddSpotPlaceable(location, obj);
+        obj.location = location;
+        objSpots++;
+    }
+    public void RemoveObject(Vector2Int location)
+    {
+        if (IsEmpty(location))
+            Debug.Log("There was no item at the location");
+        else
+        {
+            islandRenderer.RemoveSpotPlaceable(Grid[location[0], location[1]]);
+            Grid[location[0], location[1]] = null;
+            objSpots--;
+        }
+    }
 
+    public bool CanTakeDamage(Vector2Int location)
+    {
+        if (AtGrid(location) is Trash)
+            Debug.LogWarning("Spot already destroyed (is trash)");
+        return !(AtGrid(location) is Trash);
+    }
+    public void TakeDamage(Vector2Int location)
+    {
+        if (IsEmpty(location))
+        {
+            Trash trash = Instantiate(trashPrefab).GetComponent<Trash>();
+            PlaceObject(trash, location);
+            trashSpots++;
+        }
+        else
+        {
+            RemoveObject(location);
+        }
+    }
+
+    public void TakeDamage(List<Vector2Int> locations)
+    {
+        foreach (var location in locations)
+            TakeDamage(location);
     }
     /*
     private Material upcomingMaterial  = null;

@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-//Object Pooler for Materials
+
 public class MaterialGenerator : MonoBehaviour
 {
     //The Material List for this round
-    public List<Material.MatType> roundMaterialList;
+    [SerializeField] MaterialObject[] materialObjects;
+    [SerializeField] GameObject materialPrefab;
+    public List<MaterialObject> roundMaterialList;
 
     public void Start()
     {
-        AddEvenBag(15);
+        AddEvenBags(5);
     }
 
-    public void AddEvenBag(int bagAmount = 1)
+    public void AddEvenBags(int bagAmount = 1)
     {
         //Creates a bag (group of materials) with each material prefab appearing exactly once in a random order
         //Its an even bag as all materials have equal occurances
 
-        Material.MatType[] nonTrashMaterials = (Material.MatType[])Enum.GetValues(typeof(Material.MatType));
-        List<Material.MatType> bag = new List<Material.MatType>();
-        for (int i = 1; i < nonTrashMaterials.Length; i++)
+        int numTypesMats = materialObjects.Length;
+        for (int i = 0; i < bagAmount; i++)
         {
-            bag.Add(nonTrashMaterials[i]);
-        }
-        for(int i = 0; i < bagAmount; i++)
-        {
-            bag.Shuffle();
-            roundMaterialList.AddRange(bag);
+            List<MaterialObject> newBag = new List<MaterialObject>();
+            foreach (var matObj in materialObjects)
+            {
+                newBag.Add(matObj);
+            }
+            newBag.Shuffle();
+            roundMaterialList.AddRange(newBag);
+
         }
     }
 
@@ -36,8 +39,10 @@ public class MaterialGenerator : MonoBehaviour
     public Material GetMaterial(int index)
     {
         while (roundMaterialList.Count <= index){
-            AddEvenBag(1);
+            AddEvenBags(1);
         }
-        return new Material(roundMaterialList[index]);
+        Material newMat = Instantiate(materialPrefab).GetComponent<Material>();
+        newMat.materialData = roundMaterialList[index];
+        return newMat;
     }
 }
